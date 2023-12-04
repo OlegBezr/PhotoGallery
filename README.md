@@ -15,6 +15,14 @@
 
 - Delete images both in full screen mode and in the folder view.
 
+- You can also delete a folder and all its contents by swiping left and tapping delete.
+
 - Add multiple images and videos to a folder at once.
 
 - You can also change the grid layout of the folder view.
+
+
+### Credits
+- https://developer.apple.com/tutorials/sample-apps/imagegallery
+
+- https://developer.apple.com/tutorials/sample-apps/capturingphotos-captureandsave

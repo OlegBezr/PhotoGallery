@@ -47,17 +47,15 @@ struct FolderGridView: View {
                                 if isEditing {
                                     Button {
                                         if FileManager.default.removeItemFromDocumentDirectory(fileName: item.fileName) {
-                                            Task { @MainActor [dataModel = self.dataModel] in
-                                                withAnimation {
-                                                    dataModel.removeItemFromFolder(folderIndex: self.folderIndex, itemIndex: index)
-                                                }
+                                            withAnimation {
+                                                dataModel.removeItemFromFolder(folderIndex: self.folderIndex, itemIndex: index)
                                             }
                                         }
                                     } label: {
                                         Image(systemName: "xmark.square.fill")
-                                                    .font(Font.title)
-                                                    .symbolRenderingMode(.palette)
-                                                    .foregroundStyle(.white, .red)
+                                            .font(Font.title)
+                                            .symbolRenderingMode(.palette)
+                                            .foregroundStyle(.white, .red)
                                     }
                                     .offset(x: 7, y: -7)
                                 }

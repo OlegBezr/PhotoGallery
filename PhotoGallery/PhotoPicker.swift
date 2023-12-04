@@ -1,25 +1,13 @@
-/*
-See the License.txt file for this sample’s licensing information.
-*/
-
 import SwiftUI
 import PhotosUI
 
 struct PhotoPicker: UIViewControllerRepresentable {
     @EnvironmentObject var dataModel: DataModel
-    
-    /// A dismiss action provided by the environment. This may be called to dismiss this view controller.
     @Environment(\.dismiss) var dismiss
     
-    var folderIndex: Int
-    
-    init(folderIndex: Int) {
-        self.folderIndex = folderIndex
-    }
-    
-    /// Creates the picker view controller that this object represents.
+    let folderIndex: Int
+
     func makeUIViewController(context: UIViewControllerRepresentableContext<PhotoPicker>) -> PHPickerViewController {
-        // Configure the picker.
         var configuration = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
         configuration.preferredAssetRepresentationMode = .current
         configuration.selectionLimit = 0
@@ -29,12 +17,10 @@ struct PhotoPicker: UIViewControllerRepresentable {
         return photoPickerViewController
     }
     
-    /// Creates the coordinator that allows the picker to communicate back to this object.
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
 
-    /// Updates the picker while it’s being presented.
     func updateUIViewController(_ uiViewController: PHPickerViewController, context: UIViewControllerRepresentableContext<PhotoPicker>) {
         // No updates are necessary.
     }
@@ -50,6 +36,10 @@ class Coordinator: NSObject, UINavigationControllerDelegate, PHPickerViewControl
         UTType.appleProtectedMPEG4Video.identifier
     ]
     let parent: PhotoPicker
+    
+    init(_ parent: PhotoPicker) {
+        self.parent = parent
+    }
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         print("Results count \(results.count)")
@@ -94,9 +84,5 @@ class Coordinator: NSObject, UINavigationControllerDelegate, PHPickerViewControl
                 }
             }
         }
-    }
-    
-    init(_ parent: PhotoPicker) {
-        self.parent = parent
     }
 }
